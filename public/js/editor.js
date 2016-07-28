@@ -18,10 +18,11 @@ $(document).ready(function() {
                 data: JSON.stringify({ "objectData": ejson})
             })
             .success(function(data) {
-                show_notification(data.msg,"success");
+                show_notification(data.msg, "success");
             })
-            .error(function(data) {
-                show_notification(data.responseJSON.msg,"danger");
+            .fail(function(xhr, status, error) {
+                var msg = JSON.parse(xhr.responseText).msg;
+                show_notification(msg, "danger");
             });
         }
         catch (err) {
